@@ -23,35 +23,6 @@ export const SocketProvider = ({ children }) => {
       socket.current.on("connect", () => {
         console.log("connected to socket server");
       });
-      // const handleReceiveMessage = (message) => {
-      //   // const { addMessage, selectedChatData, selectedChatType } =
-      //   //   useAppStore.getState();
-
-      //   // if (
-      //   //   selectedChatType !== undefined &&
-      //   //   (selectedChatData._id === message.sender._id ||
-      //   //     selectedChatData._id === message.recipient._id)
-      //   // ) {
-      //   //   addMessage(message);
-      //   //   console.log(message)
-      //   // }
-
-      //   const {
-      //     addMessage,
-      //     selectedChatData,
-      //     selectedChatType,
-      //     updateLatestMessageInContactList,
-      //   } = useAppStore.getState();
-        
-      //   if (
-      //     selectedChatType !== undefined &&
-      //     (selectedChatData._id === message.sender._id ||
-      //       selectedChatData._id === message.recipient._id)
-      //   ) {
-      //     addMessage(message);
-      //   }
-      //   updateLatestMessageInContactList(message);
-      // };
 
       const handleReceiveMessage = (message) => {
         const {
@@ -61,25 +32,25 @@ export const SocketProvider = ({ children }) => {
           updateLatestMessageInContactList,
           updateLastMessage, // <-- ADD THIS
         } = useAppStore.getState();
-      
+
         const isCurrentChatOpen =
           selectedChatType !== undefined &&
           (selectedChatData._id === message.sender._id ||
             selectedChatData._id === message.recipient._id);
-      
+
         if (isCurrentChatOpen) {
           addMessage(message);
         } else {
           updateLastMessage(message.sender._id, message); // <-- Mark unread
         }
-      
-        updateLatestMessageInContactList(message);
+
+        // updateLatestMessageInContactList(message);
       };
-      
+
       socket.current.on("receiveMessage", handleReceiveMessage);
       return () => {
         socket.current.disconnect();
-      }; 
+      };
     }
   }, [userInfo]);
 

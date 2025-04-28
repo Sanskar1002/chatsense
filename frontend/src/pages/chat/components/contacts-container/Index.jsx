@@ -20,7 +20,7 @@ const ContactsContainer = () => {
     const getContacts = async () => {
       try {
         const response = await apiClient.get(GET_DM_CONTACTS_ROUTES);
-        console.log(response);
+        // console.log(response);
         setDirectMessagesContactList(response.data.contacts);
         // console.log(directMessagesContactList);
       } catch (error) {

@@ -258,7 +258,7 @@ const MessageContainer = () => {
 
   const renderDMMessages = (message) => {
     const emotion = message.emotion || "neutral"; // Default to neutral if emotion is missing
-    console.log(emotion);
+    // console.log(emotion);
     const emotionClass = emotionColors[emotion] || "text-gray-400";
 
     return (
